@@ -1,4 +1,4 @@
-def FCFS(burstTime, arrivalTime):
+def calculation(burstTime, arrivalTime, isFCFS):
 
     n = len(burstTime)
 
@@ -22,15 +22,20 @@ def FCFS(burstTime, arrivalTime):
         checker += i
 
     if checker > 0:
-        processes = sorted(zip(arrivalTime, process, burstTime))
+        if isFCFS:
+            processes = sorted(zip(arrivalTime, process, burstTime))
 
-        arrivalTime = [p[0] for p in processes]
-        process = [p[1] for p in processes]
-        burstTime = [p[2] for p in processes]
+            arrivalTime = [p[0] for p in processes]
+            process = [p[1] for p in processes]
+            burstTime = [p[2] for p in processes]
+        else:
+            processes = sorted(zip(arrivalTime, burstTime, process))
+
+            arrivalTime = [p[0] for p in processes]
+            burstTime = [p[1] for p in processes]
+            process = [p[2] for p in processes]
         
     
-
-
     # Finish Time calculation
     for i in range(n):
 
@@ -86,7 +91,7 @@ def FCFS(burstTime, arrivalTime):
     return table
         
 
-#---------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------
 """
 burstTime = input("Enter the Burst Time | ").strip()
 arrivalTime = input("Enter the Arrival Time | ").strip()
@@ -112,5 +117,4 @@ for i in table:
         print(i)
 
 #SJF(BTime, ATime)
-
 """

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from console import FCFS
+from console import calculation
 
 bp = Blueprint('routes', __name__)
 
@@ -12,6 +12,13 @@ def home():
 
         BTime_input = request.form.get('BTime').strip()
         BTime_input = BTime_input.split(" ")
+
+        algorithm = request.form.get("algorithm")
+
+        if algorithm =='FCFS':
+            algorithm = True
+        else:
+            algorithm = False
 
         ATime = []
         BTime = []
@@ -34,6 +41,7 @@ def home():
             
             session['ATime'] = ATime
             session['BTime'] = BTime
+            session['algorithm'] = algorithm
             return redirect(url_for('routes.main'))
     
     return render_template('home.html', errors=errors)
@@ -43,9 +51,10 @@ def home():
 def main():
     ATime = session.get('ATime',[])
     BTime= session.get('BTime',[])
-    
+    algorithm = session.get('algorithm')
+
     n = len(BTime)
-    table = FCFS(BTime, ATime)
+    table = calculation(BTime, ATime, algorithm)
 
     sortedTable = sorted(table, key=lambda row: row[0])
  
