@@ -1,8 +1,52 @@
 {% extends 'base.html' %}
+{% block styles %}<link rel="stylesheet" href="../static/main.css">{% endblock %}
 
 {% block content %}
 
-    <h1>INSERT TABLE HERE</h1>
+    <h1>RESULTS FCFS</h1>
+
+    <h2>Gantt Chart</h2>
+    <div class="chart">
+        {% for row in table %}
+            <div class="task">{{ row[0] }}</div>
+        {% endfor %}
+    </div>
+    <div class="labels">
+        <span>0</span>
+        {% for row in table %}
+        <span>{{ row[3] }}</span>
+        {% endfor %}
+    </div>
+
+
+    <div class="table-container">
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Process</th>
+                <th>Arrival Time</th>
+                <th>Burst Time</th>
+                <th>Finish Time</th>
+                <th>Turnaround Time</th>
+                <th>Waiting Time</th>    
+            </tr>
+
+            {% for row in sortedTable %}            
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+            </tr>    
+            {% endfor%}  
+            
+        </table>
+
+        <br><h1>AVERAGE TAT = {{AveTAT}}</h1>
+        <br><h1>AVERAGE WT = {{AveWT}}</h1>
+
+    </div>
 
 
 {% endblock %}

@@ -21,8 +21,6 @@ def FCFS(burstTime, arrivalTime):
     for i in arrivalTime:
         checker += i
 
-    print(checker)
-
     if checker > 0:
         processes = sorted(zip(arrivalTime, burstTime, process))
 
@@ -78,17 +76,16 @@ def FCFS(burstTime, arrivalTime):
 
         table.append(temp)
 
-    sorted_table = sorted(table)
+    #sorted_table = sorted(table)
 
-    for i in sorted_table:
-        print(i)
+    #print(f"Average TAT = {AveTAT}" )
+    #print(f"Average WT = {AveWT}")
 
-    print(f"Average TAT = {AveTAT}" )
-    print(f"Average WT = {AveWT}")
+    return table
         
 
 #---------------------------------------------------------------------------------------------------------------
-
+"""
 burstTime = input("Enter the Burst Time | ").strip()
 arrivalTime = input("Enter the Arrival Time | ").strip()
 
@@ -107,6 +104,11 @@ for a in arrivalTime:
     ATime.append(a)
 
 
-FCFS(BTime, ATime)
+table = FCFS(BTime, ATime)
+
+for i in table:
+        print(i)
+
 #SJF(BTime, ATime)
 
+"""

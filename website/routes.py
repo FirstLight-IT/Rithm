@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
+from console import FCFS
 
 bp = Blueprint('routes', __name__)
 
@@ -37,9 +38,22 @@ def home():
 
 @bp.route('/solution')
 def main():
-    ATime = session.get('ATime',[])
-    BTime = session.get('BTime',[])
+    ATime_input = session.get('ATime',[])
+    BTime_input = session.get('BTime',[])
+    
+    n = len(BTime_input)
+    table = FCFS(BTime_input, ATime_input)
 
-    print(ATime)
+    sortedTable = sorted(table, key=lambda row: row[0])
+ 
+    sumTAT = 0
+    sumWT = 0
 
-    return render_template('main.html')
+    for i in table:
+        sumTAT += i[4]
+        sumWT += i[5]
+
+    AveTAT = float(sumTAT)/n
+    AveWT = float(sumWT)/n
+
+    return render_template('main.html', table=table, sortedTable=sortedTable, AveTAT=AveTAT, AveWT=AveWT)
