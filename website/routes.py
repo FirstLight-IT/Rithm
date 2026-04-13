@@ -27,6 +27,9 @@ def home():
         if len(ATime) != len(BTime):
             errors.append("Mismatched number of values.")
 
+        if len(ATime) < 2 or len(BTime) < 2:
+            errors.append("Must have at least 2 values.")
+
         if not errors:
             
             session['ATime'] = ATime
@@ -38,11 +41,11 @@ def home():
 
 @bp.route('/solution')
 def main():
-    ATime_input = session.get('ATime',[])
-    BTime_input = session.get('BTime',[])
+    ATime = session.get('ATime',[])
+    BTime= session.get('BTime',[])
     
-    n = len(BTime_input)
-    table = FCFS(BTime_input, ATime_input)
+    n = len(BTime)
+    table = FCFS(BTime, ATime)
 
     sortedTable = sorted(table, key=lambda row: row[0])
  

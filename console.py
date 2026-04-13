@@ -22,11 +22,13 @@ def FCFS(burstTime, arrivalTime):
         checker += i
 
     if checker > 0:
-        processes = sorted(zip(arrivalTime, burstTime, process))
+        processes = sorted(zip(arrivalTime, process, burstTime))
 
         arrivalTime = [p[0] for p in processes]
-        burstTime = [p[1] for p in processes]
-        process = [p[2] for p in processes] 
+        process = [p[1] for p in processes]
+        burstTime = [p[2] for p in processes]
+        
+    
 
 
     # Finish Time calculation

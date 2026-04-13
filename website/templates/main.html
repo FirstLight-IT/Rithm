@@ -8,13 +8,13 @@
     <h2>Gantt Chart</h2>
     <div class="chart">
         {% for row in table %}
-            <div class="task">{{ row[0] }}</div>
+            <div class="task">P{{ row[0] }}</div>
         {% endfor %}
     </div>
     <div class="labels">
-        <span>0</span>
+        <small>0</small>
         {% for row in table %}
-        <span>{{ row[3] }}</span>
+        <small>{{ row[3] }}</small>
         {% endfor %}
     </div>
 
@@ -32,7 +32,7 @@
 
             {% for row in sortedTable %}            
             <tr>
-                <td>{{ row[0] }}</td>
+                <td>P{{ row[0] }}</td>
                 <td>{{ row[1] }}</td>
                 <td>{{ row[2] }}</td>
                 <td>{{ row[3] }}</td>
