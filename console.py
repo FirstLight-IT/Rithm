@@ -2,42 +2,68 @@ import numpy as np
 
 def FCFS(burstTime, arrivalTime):
 
-    #n = len(burstTime)
-    finishTime = [0]
+    n = len(burstTime)
+    finishTime = []
+    turnaroundTime = []
+    waitingTime = []
+
+    AveTAT = 0
+    AveWT = 0
     currentTime = 0
+    checker = 0
 
-    processes = sorted(zip(arrivalTime, burstTime))
+    for i in arrivalTime:
+        checker += i
 
-    arrivalTime = [p[0] for p in processes]
-    burstTime = [p[1] for p in processes]
+    if checker > 0:
+        processes = sorted(zip(arrivalTime, burstTime))
 
-    print(burstTime)
+        arrivalTime = [p[0] for p in processes]
+        burstTime = [p[1] for p in processes]
 
-    for i in range(len(burstTime)):
+
+    # Finish Time calculation
+    for i in range(n):
 
         if currentTime < arrivalTime[i]:
             currentTime = arrivalTime[i]
 
         currentTime += burstTime[i]
         finishTime.append(currentTime)
-    
     print(finishTime)
 
+    # Turnaround Time Calculation
+    for i in range(n):
+
+        turnaroundTime.append(finishTime[i] - arrivalTime[i])
+    print(turnaroundTime)
+
+    # Waiting Time Calculation
+    for i in range(n):
+
+        waitingTime.append(turnaroundTime[i] - burstTime[i])
+    print(waitingTime)
+
+    #Average Calculations
+    sumTAT = 0
+    sumWT = 0
+    for i in range(n):
+
+        sumTAT += turnaroundTime[i]
+        sumWT += waitingTime[i]
+
+    AveTAT = float(sumTAT)/n
+    AveWT = float(sumWT)/n
+
+    print(f"Average TAT = {AveTAT}" )
+    print(f"Average WT = {AveWT}")
+        
+
+    # Combining everything into a table
 
 
-def SJF(burstTime, arrivalTime):
 
-    burstTime.sort()
 
-    finishTime = [0]
-    currentTime = 0
-
-    for i in burstTime:
-
-        currentTime = currentTime + i
-        finishTime.append(currentTime)
-    
-    print(finishTime)
 
 #---------------------------------------------------------------------------------------------------------------
 
