@@ -1,8 +1,8 @@
 :root {
-    --light-blue: #ebf1ff;
-    --theme-blue: #5e89ff;
-    --dark-blue: #4a6ecc;
-    --border-blue: #d0dcff;
+    --light-blue: #eef8ff;
+    --theme-blue: rgb(45, 171, 255);
+    --hover-blue: rgb(174, 223, 255);
+    --border-blue: #d0e8ff;
     --text-dark: #2c3e50;
     --text-muted: #6c757d;
     --white: #ffffff;
@@ -41,7 +41,7 @@ body {
 .results-header h2 {
     font-weight: 600;
     letter-spacing: 2px;
-    color: rgb(94, 137, 255);
+    color: var(--theme-blue);
 }
 
 .results-header p {
@@ -109,7 +109,7 @@ h3 {
 }
 
 .process-table thead tr {
-    background-color: rgb(94, 137, 255);
+    background-color: var(--theme-blue);
     color: var(--white);
 }
 
@@ -130,18 +130,18 @@ h3 {
 }
 
 .process-table tbody tr:hover {
-    background-color: #dee7ff;
+    background-color: #e3f2fd;
 }
 
 /* Averages */
 .averages {
     display: flex;
     width: 100%;
-    margin-top: 1.5rem;
+    margin-top: 1.5rem; 
     border: 1px solid var(--border-blue);
     border-radius: var(--radius);
     overflow: hidden;
-    background-color: rgb(94, 137, 255);
+    background-color: var(--theme-blue);
 }
 
 .avg-box {
@@ -184,6 +184,6 @@ h3 {
 }
 
 .back-btn:hover {
-    background-color: var(--theme-blue);
+    background-color: var(--hover-blue);
     color: var(--white);
 }
