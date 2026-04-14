@@ -3,7 +3,7 @@ def calculation(burstTime, arrivalTime, isFCFS):
     n = len(burstTime)
 
     process = []
-    finishTime = []
+    finishTime = [0] * n
     turnaroundTime = []
     waitingTime = []
     table = []
@@ -21,100 +21,82 @@ def calculation(burstTime, arrivalTime, isFCFS):
     for i in arrivalTime:
         checker += i
 
-    if checker > 0:
-        if isFCFS:
-            processes = sorted(zip(arrivalTime, process, burstTime))
+    # FCFS sorting (keep this)
+    if checker > 0 and isFCFS:
+        processes = sorted(zip(arrivalTime, process, burstTime))
+        arrivalTime = [p[0] for p in processes]
+        process = [p[1] for p in processes]
+        burstTime = [p[2] for p in processes]
 
-            arrivalTime = [p[0] for p in processes]
-            process = [p[1] for p in processes]
-            burstTime = [p[2] for p in processes]
-        else:
-            processes = sorted(zip(arrivalTime, burstTime, process))
+    # -------------------------------
+    # FINISH TIME CALCULATION
+    # -------------------------------
+    if isFCFS:
+        for i in range(n):
+            if currentTime < arrivalTime[i]:
+                currentTime = arrivalTime[i]
 
-            arrivalTime = [p[0] for p in processes]
-            burstTime = [p[1] for p in processes]
-            process = [p[2] for p in processes]
-        
-    
-    # Finish Time calculation
+            currentTime += burstTime[i]
+            finishTime[i] = currentTime
+
+    else:
+        # ✅ Correct SJF (non-preemptive)
+        visited = [False] * n
+        completed = 0
+
+        while completed < n:
+            idx = -1
+            min_bt = float('inf')
+
+            for i in range(n):
+                if (arrivalTime[i] <= currentTime and 
+                    not visited[i] and 
+                    burstTime[i] < min_bt):
+                    min_bt = burstTime[i]
+                    idx = i
+
+            # If no process has arrived yet
+            if idx == -1:
+                currentTime += 1
+                continue
+
+            currentTime += burstTime[idx]
+            finishTime[idx] = currentTime
+            visited[idx] = True
+            completed += 1
+
+    # -------------------------------
+    # TURNAROUND TIME
+    # -------------------------------
     for i in range(n):
-
-        if currentTime < arrivalTime[i]:
-           currentTime = arrivalTime[i]
-
-        currentTime += burstTime[i]
-        finishTime.append(currentTime)
-    #print(finishTime)
-
-    # Turnaround Time Calculation
-    for i in range(n):
-
         turnaroundTime.append(finishTime[i] - arrivalTime[i])
-    #print(turnaroundTime)
 
-    # Waiting Time Calculation
+    # -------------------------------
+    # WAITING TIME
+    # -------------------------------
     for i in range(n):
-
         waitingTime.append(turnaroundTime[i] - burstTime[i])
-    #print(waitingTime)
 
-    #Average Calculations
-    sumTAT = 0
-    sumWT = 0
-    for i in range(n):
+    # -------------------------------
+    # AVERAGES
+    # -------------------------------
+    sumTAT = sum(turnaroundTime)
+    sumWT = sum(waitingTime)
 
-        sumTAT += turnaroundTime[i]
-        sumWT += waitingTime[i]
+    AveTAT = sumTAT / n
+    AveWT = sumWT / n
 
-    AveTAT = float(sumTAT)/n
-    AveWT = float(sumWT)/n
-
-
-    # Combining everything into a table
+    # -------------------------------
+    # TABLE
+    # -------------------------------
     for i in range(n):
         temp = []
-
         temp.append(process[i])
         temp.append(arrivalTime[i])
         temp.append(burstTime[i])
         temp.append(finishTime[i])
         temp.append(turnaroundTime[i])
         temp.append(waitingTime[i])
-
         table.append(temp)
 
-    #sorted_table = sorted(table)
-
-    #print(f"Average TAT = {AveTAT}" )
-    #print(f"Average WT = {AveWT}")
-
     return table
-        
-
-#-------------------------------------------------------------------------------------------------
-"""
-burstTime = input("Enter the Burst Time | ").strip()
-arrivalTime = input("Enter the Arrival Time | ").strip()
-
-burstTime = burstTime.split(" ")
-arrivalTime = arrivalTime.split(" ")
-
-BTime = []
-ATime = []
-
-for b in burstTime:
-    b = int(b)
-    BTime.append(b)
-
-for a in arrivalTime:
-    a = int(a)
-    ATime.append(a)
-
-
-table = FCFS(BTime, ATime)
-
-for i in table:
-        print(i)
-
-#SJF(BTime, ATime)
-"""
