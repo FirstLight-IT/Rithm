@@ -4,43 +4,39 @@ def calculation(burstTime, arrivalTime, isFCFS):
 
     process = []
     finishTime = [0] * n
-    turnaroundTime = []
-    waitingTime = []
+    turnaroundTime = [0] * n
+    waitingTime = [0] * n
     table = []
  
-    AveTAT = 0
-    AveWT = 0
     currentTime = 0
-    checker = 0
     pCounter = 0
 
     for i in range(n):
         pCounter += 1
         process.append(pCounter)
 
-    for i in arrivalTime:
-        checker += i
-
-    # FCFS sorting (keep this)
-    if checker > 0 and isFCFS:
-        processes = sorted(zip(arrivalTime, process, burstTime))
-        arrivalTime = [p[0] for p in processes]
-        process = [p[1] for p in processes]
-        burstTime = [p[2] for p in processes]
-
-    # -------------------------------
-    # FINISH TIME CALCULATION
-    # -------------------------------
+    # FCFS sorting
     if isFCFS:
-        for i in range(n):
-            if currentTime < arrivalTime[i]:
-                currentTime = arrivalTime[i]
+        processes = sorted(zip(arrivalTime, process, burstTime))
+        # Unpack sorted values
+        arr_sorted = [p[0] for p in processes]
+        proc_sorted = [p[1] for p in processes]
+        burst_sorted = [p[2] for p in processes]
 
-            currentTime += burstTime[i]
-            finishTime[i] = currentTime
+        for i in range(n):
+            if currentTime < arr_sorted[i]:
+                currentTime = arr_sorted[i]
+
+            currentTime += burst_sorted[i]
+            ft = currentTime
+            tat = ft - arr_sorted[i]
+            wt = tat - burst_sorted[i]
+            
+            # Append to table in execution order
+            table.append([proc_sorted[i], arr_sorted[i], burst_sorted[i], ft, tat, wt])
 
     else:
-        # ✅ Correct SJF (non-preemptive)
+        # SJF (non-preemptive)
         visited = [False] * n
         completed = 0
 
@@ -55,48 +51,19 @@ def calculation(burstTime, arrivalTime, isFCFS):
                     min_bt = burstTime[i]
                     idx = i
 
-            # If no process has arrived yet
             if idx == -1:
                 currentTime += 1
                 continue
 
             currentTime += burstTime[idx]
-            finishTime[idx] = currentTime
+            ft = currentTime
+            tat = ft - arrivalTime[idx]
+            wt = tat - burstTime[idx]
+            
+            # Append to table in execution order (Fixes the Gantt Chart)
+            table.append([process[idx], arrivalTime[idx], burstTime[idx], ft, tat, wt])
+            
             visited[idx] = True
             completed += 1
-
-    # -------------------------------
-    # TURNAROUND TIME
-    # -------------------------------
-    for i in range(n):
-        turnaroundTime.append(finishTime[i] - arrivalTime[i])
-
-    # -------------------------------
-    # WAITING TIME
-    # -------------------------------
-    for i in range(n):
-        waitingTime.append(turnaroundTime[i] - burstTime[i])
-
-    # -------------------------------
-    # AVERAGES
-    # -------------------------------
-    sumTAT = sum(turnaroundTime)
-    sumWT = sum(waitingTime)
-
-    AveTAT = sumTAT / n
-    AveWT = sumWT / n
-
-    # -------------------------------
-    # TABLE
-    # -------------------------------
-    for i in range(n):
-        temp = []
-        temp.append(process[i])
-        temp.append(arrivalTime[i])
-        temp.append(burstTime[i])
-        temp.append(finishTime[i])
-        temp.append(turnaroundTime[i])
-        temp.append(waitingTime[i])
-        table.append(temp)
 
     return table

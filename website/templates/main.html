@@ -15,13 +15,13 @@
         <h3>Gantt Chart</h3>
         <div class="gantt-wrapper">
             <div class="gantt-chart">
-                {% for row in sortedTable %}
+                {% for row in executionTable %}
                 <div class="gantt-bar">P{{ row[0] }}</div>
                 {% endfor %}
             </div>
             <div class="gantt-times">
                 <span class="t-start">0</span>
-                {% for row in sortedTable %}
+                {% for row in executionTable %}
                 <span class="t-end">{{ row[3] }}</span>
                 {% endfor %}
             </div>
@@ -44,7 +44,13 @@
             <tbody>
                 {% for row in sortedTable %}
                 <tr>
-                    <td>P{{ row[0] }}</td> <td>{{ row[1] }}</td> <td>{{ row[2] }}</td> <td>{{ row[3] }}</td> <td>{{ row[4] }}</td> <td>{{ row[5] }}</td> </tr>
+                    <td>P{{ row[0] }}</td> 
+                    <td>{{ row[1] }}</td> 
+                    <td>{{ row[2] }}</td> 
+                    <td>{{ row[3] }}</td> 
+                    <td>{{ row[4] }}</td> 
+                    <td>{{ row[5] }}</td> 
+                </tr>
                 {% endfor %}
             </tbody>
         </table>

@@ -7,46 +7,27 @@ bp = Blueprint('routes', __name__)
 def home():
     errors = []
     if request.method == 'POST':
-        ATime_input = request.form.get('ATime').strip()
-        ATime_input = ATime_input.split(" ")
-
-        BTime_input = request.form.get('BTime').strip()
-        BTime_input = BTime_input.split(" ")
-
+        ATime_input = request.form.get('ATime').strip().split(" ")
+        BTime_input = request.form.get('BTime').strip().split(" ")
         algorithm = request.form.get("algorithm")
 
-        if algorithm =='FCFS':
-            algorithm = True
-        else:
-            algorithm = False
+        algorithm = True if algorithm == 'FCFS' else False
 
-        ATime = []
-        BTime = []
-
-        for a in ATime_input:
-            a = int(a)
-            ATime.append(a)
-
-        for b in BTime_input:
-            b = int(b)
-            BTime.append(b)
+        try:
+            ATime = [int(a) for a in ATime_input]
+            BTime = [int(b) for b in BTime_input]
+        except ValueError:
+            errors.append("Please enter valid numbers.")
+            return render_template('home.html', errors=errors)
 
         if len(ATime) != len(BTime):
             errors.append("Mismatched number of values.")
-
-        if len(ATime) < 2 or len(BTime) < 2:
+        if len(ATime) < 2:
             errors.append("Must have at least 2 values.")
-
-        counter = 0
-        for i in BTime:
-            if i <= 0:
-                counter += 1
-
-        if counter > 0:
-            errors.append("Burstime should not be zero")
+        if any(b <= 0 for b in BTime):
+            errors.append("Burst time should not be zero or negative.")
 
         if not errors:
-            
             session['ATime'] = ATime
             session['BTime'] = BTime
             session['algorithm'] = algorithm
@@ -54,26 +35,23 @@ def home():
     
     return render_template('home.html', errors=errors)
 
-
 @bp.route('/solution')
 def main():
-    ATime = session.get('ATime',[])
-    BTime= session.get('BTime',[])
+    ATime = session.get('ATime', [])
+    BTime = session.get('BTime', [])
     algorithm = session.get('algorithm')
 
     n = len(BTime)
-    table = calculation(BTime, ATime, algorithm)
+    # This table is now in execution order from console.py
+    executionTable = calculation(BTime, ATime, algorithm)
 
-    sortedTable = sorted(table, key=lambda row: row[0])
+    # Sort by Process ID (P1, P2, P3...) for the bottom table
+    sortedTable = sorted(executionTable, key=lambda row: row[0])
  
-    sumTAT = 0
-    sumWT = 0
+    sumTAT = sum(row[4] for row in executionTable)
+    sumWT = sum(row[5] for row in executionTable)
 
-    for i in table:
-        sumTAT += i[4]
-        sumWT += i[5]
+    AveTAT = float(sumTAT)/n if n > 0 else 0
+    AveWT = float(sumWT)/n if n > 0 else 0
 
-    AveTAT = float(sumTAT)/n
-    AveWT = float(sumWT)/n
-
-    return render_template('main.html', table=table, sortedTable=sortedTable, AveTAT=AveTAT, AveWT=AveWT)
+    return render_template('main.html', executionTable=executionTable, sortedTable=sortedTable, AveTAT=AveTAT, AveWT=AveWT)
