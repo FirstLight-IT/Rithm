@@ -34,7 +34,7 @@ body {
 
 .left-panel {
     flex: 1;
-    background-color: var(--light-green);
+    background-color: rgb(94, 137, 255);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,16 +42,16 @@ body {
 }
 
 .logo-placeholder {
-    width: 160px;
+    
     height: 160px;
-    background-color: var(--white);
+  
     border-radius: var(--radius);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-muted);
     font-size: 0.85rem;
-    border: 1px dashed var(--focus-green);
+   
 }
 
 .right-panel {
@@ -105,7 +105,7 @@ body {
 
 .form-input:focus {
     outline: none;
-    border-color: var(--focus-green);
+    border-color: rgb(94, 137, 255);;
     box-shadow: 0 0 0 3px rgba(129, 199, 132, 0.25);
 }
 
@@ -118,7 +118,7 @@ select.form-input {
 
 .submit-btn {
     padding: 0.8rem;
-    background-color: var(--light-green);
+    background-color: rgb(94, 137, 255);;
     color: var(--text-dark);
     border: 1px solid var(--focus-green);
     border-radius: var(--radius);
@@ -130,7 +130,7 @@ select.form-input {
 }
 
 .submit-btn:hover {
-    background-color: var(--focus-green);
+    background-color: rgb(162, 187, 255);;
     color: var(--white);
 }
 

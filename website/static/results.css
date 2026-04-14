@@ -41,7 +41,7 @@ body {
 .results-header h2 {
     font-weight: 600;
     letter-spacing: 2px;
-    color: var(--dark-green);
+    color: rgb(94, 137, 255);;
 }
 
 .results-header p {
@@ -109,7 +109,7 @@ h3 {
 }
 
 .process-table thead tr {
-    background-color: var(--dark-green);
+    background-color: rgb(94, 137, 255);;
     color: var(--white);
 }
 
@@ -141,7 +141,7 @@ h3 {
     border: 1px solid var(--border-green);
     border-radius: var(--radius);
     overflow: hidden;
-    background-color: var(--dark-green);
+    background-color: rgb(94, 137, 255);;
 }
 
 .avg-box {
