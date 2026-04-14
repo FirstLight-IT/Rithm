@@ -1,8 +1,8 @@
 :root {
-    --light-green: #e8f5e9;
-    --theme-green: #81c784;
-    --dark-green: #4caf50;
-    --border-green: #c8e6c9;
+    --light-blue: #ebf1ff;
+    --theme-blue: #5e89ff;
+    --dark-blue: #4a6ecc;
+    --border-blue: #d0dcff;
     --text-dark: #2c3e50;
     --text-muted: #6c757d;
     --white: #ffffff;
@@ -41,7 +41,7 @@ body {
 .results-header h2 {
     font-weight: 600;
     letter-spacing: 2px;
-    color: rgb(45, 171, 255);
+    color: rgb(94, 137, 255);
 }
 
 .results-header p {
@@ -65,7 +65,7 @@ h3 {
 
 .gantt-chart {
     display: flex;
-    border: 1px solid var(--border-green);
+    border: 1px solid var(--border-blue);
     border-radius: var(--radius);
     overflow: hidden;
     margin-bottom: 0.5rem;
@@ -74,8 +74,8 @@ h3 {
 .gantt-bar {
     flex: 1;
     padding: 0.85rem 0;
-    background-color: var(--light-green);
-    border-right: 1px solid var(--border-green);
+    background-color: var(--light-blue);
+    border-right: 1px solid var(--border-blue);
     text-align: center;
     font-weight: 500;
     font-size: 0.9rem;
@@ -105,19 +105,19 @@ h3 {
     border-collapse: collapse;
     border-radius: var(--radius);
     overflow: hidden;
-    border: 1px solid var(--border-green);
+    border: 1px solid var(--border-blue);
 }
 
 .process-table thead tr {
-    background-color: rgb(45, 171, 255);
+    background-color: rgb(94, 137, 255);
     color: var(--white);
 }
 
 .process-table th, .process-table td {
     padding: 0.9rem 1rem;
     text-align: center;
-    border-bottom: 1px solid var(--border-green);
-    border-right: 1px solid var(--border-green);
+    border-bottom: 1px solid var(--border-blue);
+    border-right: 1px solid var(--border-blue);
     font-size: 0.9rem;
 }
 
@@ -126,22 +126,22 @@ h3 {
 }
 
 .process-table tbody tr:nth-child(even) {
-    background-color: var(--light-green);
+    background-color: var(--light-blue);
 }
 
 .process-table tbody tr:hover {
-    background-color: #d4edda;
+    background-color: #dee7ff;
 }
 
 /* Averages */
 .averages {
     display: flex;
     width: 100%;
-    margin-top: 1.5rem; /* CHANGE 2: Added spacing between table and averages */
-    border: 1px solid var(--border-green);
+    margin-top: 1.5rem;
+    border: 1px solid var(--border-blue);
     border-radius: var(--radius);
     overflow: hidden;
-    background-color: rgb(45, 171, 255);
+    background-color: rgb(94, 137, 255);
 }
 
 .avg-box {
@@ -173,17 +173,17 @@ h3 {
     display: inline-block;
     margin-top: 1rem;
     padding: 0.65rem 1.2rem;
-    background-color: var(--light-green);
+    background-color: var(--light-blue);
     color: var(--text-dark);
     text-decoration: none;
     border-radius: 8px;
     font-size: 0.85rem;
     font-weight: 500;
     transition: all 0.2s;
-    border: 1px solid var(--theme-green);
+    border: 1px solid var(--theme-blue);
 }
 
 .back-btn:hover {
-    background-color: var(--theme-green);
+    background-color: var(--theme-blue);
     color: var(--white);
 }
