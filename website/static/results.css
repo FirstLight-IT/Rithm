@@ -1,0 +1,189 @@
+:root {
+    --light-green: #e8f5e9;
+    --theme-green: #81c784;
+    --dark-green: #4caf50;
+    --border-green: #c8e6c9;
+    --text-dark: #2c3e50;
+    --text-muted: #6c757d;
+    --white: #ffffff;
+    --bg-light: #f9fbf9;
+    --radius: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.results-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.results-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.results-header h2 {
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--dark-green);
+}
+
+.results-header p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+h3 {
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    letter-spacing: 0.5px;
+}
+
+/* Gantt Chart */
+.gantt-section, .table-section {
+    margin-bottom: 2.5rem;
+}
+
+.gantt-chart {
+    display: flex;
+    border: 1px solid var(--border-green);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.gantt-bar {
+    flex: 1;
+    padding: 0.85rem 0;
+    background-color: var(--light-green);
+    border-right: 1px solid var(--border-green);
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.gantt-bar:last-child { border-right: none; }
+
+.gantt-times {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding: 0;
+    margin-top: 6px;
+}
+
+.gantt-times span {
+    flex: 0 0 auto;
+    min-width: 24px;
+    text-align: center;
+}
+
+/* Process Table */
+.process-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border-green);
+}
+
+.process-table thead tr {
+    background-color: var(--dark-green);
+    color: var(--white);
+}
+
+.process-table th, .process-table td {
+    padding: 0.9rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-green);
+    border-right: 1px solid var(--border-green);
+    font-size: 0.9rem;
+}
+
+.process-table th:last-child, .process-table td:last-child {
+    border-right: none;
+}
+
+.process-table tbody tr:nth-child(even) {
+    background-color: var(--light-green);
+}
+
+.process-table tbody tr:hover {
+    background-color: #d4edda;
+}
+
+/* Averages */
+.averages {
+    display: flex;
+    width: 100%;
+    margin-top: 1.5rem; /* CHANGE 2: Added spacing between table and averages */
+    border: 1px solid var(--border-green);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background-color: var(--dark-green);
+}
+
+.avg-box {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    text-align: center;
+    color: var(--white);
+    border-right: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.avg-box:last-child { border-right: none; }
+
+.avg-box span {
+    font-size: 0.75rem;
+    opacity: 0.85;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.avg-box strong {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.65rem 1.2rem;
+    background-color: var(--light-green);
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: 1px solid var(--theme-green);
+}
+
+.back-btn:hover {
+    background-color: var(--theme-green);
+    color: var(--white);
+}

@@ -1,29 +1,47 @@
 {% extends 'base.html' %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='input.css') }}">
+{% endblock %}
+
 {% block content %}
-
-    <h2>WELCOME TO</h2>
-    <h1>RITHM</h1>
-
-    <form method="POST">
-
-        <label>Algorithm</label>
-        <select name="algorithm">
-            <option value="FCFS">FCFS</option>
-            <option value="SJF">SJF</option>
-        </select>
-
-
-        <br><br>
-        <label>Arrival Time</label>
-        <input type="text" required name="ATime"><br><br>
-
-        <label>Burst Time</label>
-        <input type="text" required name="BTime"<br><br>
-
-        <input type="submit">
-        
-    </form>
-
-
+<div class="input-container">
+    <div class="left-panel">
+        <!-- Replace src with your actual logo path -->
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Rithm Logo" class="logo-placeholder">
+    </div>
+    
+    <div class="right-panel">
+        <h2 class="app-title">RITHM</h2>
+        <form method="POST" action="/" class="input-form">
+            <div class="form-group">
+                <label for="algorithm">Algorithm</label>
+                <select id="algorithm" name="algorithm" class="form-input">
+                    <option value="FCFS">FCFS</option>
+                    <option value="SJF">SJF</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="ATime">Arrival Time</label>
+                <input type="text" id="ATime" name="ATime" class="form-input" placeholder="e.g., 0 1 2" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="BTime">Burst Time</label>
+                <input type="text" id="BTime" name="BTime" class="form-input" placeholder="e.g., 4 3 2" required>
+            </div>
+            
+            {% if errors %}
+                <div class="error-box">
+                    {% for error in errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <button type="submit" class="submit-btn">See Results</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

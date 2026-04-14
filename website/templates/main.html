@@ -1,52 +1,66 @@
 {% extends 'base.html' %}
-{% block styles %}<link rel="stylesheet" href="../static/main.css">{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+{% endblock %}
 
 {% block content %}
+<div class="results-container">
+    <header class="results-header">
+        <h2>RITHM</h2>
+        <p>RESULTS: {% if session.get('algorithm') == True %}FCFS{% else %}SJF{% endif %}</p>
+    </header>
 
-    <h1>RESULTS FCFS</h1>
+    <section class="gantt-section">
+        <h3>Gantt Chart</h3>
+        <div class="gantt-wrapper">
+            <div class="gantt-chart">
+                {% for row in table %}
+                <div class="gantt-bar">P{{ row[0] }}</div>
+                {% endfor %}
+            </div>
+            <div class="gantt-times">
+                <span class="t-start">0</span>
+                {% for row in table %}
+                <span class="t-end">{{ row[3] }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 
-    <h2>Gantt Chart</h2>
-    <div class="chart">
-        {% for row in table %}
-            <div class="task">P{{ row[0] }}</div>
-        {% endfor %}
-    </div>
-    <div class="labels">
-        <small>0</small>
-        {% for row in table %}
-        <small>{{ row[3] }}</small>
-        {% endfor %}
-    </div>
-
-
-    <div class="table-container">
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>Process</th>
-                <th>Arrival Time</th>
-                <th>Burst Time</th>
-                <th>Finish Time</th>
-                <th>Turnaround Time</th>
-                <th>Waiting Time</th>    
-            </tr>
-
-            {% for row in sortedTable %}            
-            <tr>
-                <td>P{{ row[0] }}</td>
-                <td>{{ row[1] }}</td>
-                <td>{{ row[2] }}</td>
-                <td>{{ row[3] }}</td>
-                <td>{{ row[4] }}</td>
-                <td>{{ row[5] }}</td>
-            </tr>    
-            {% endfor%}  
-            
+    <section class="table-section">
+        <h3>Process Table</h3>
+        <table class="process-table">
+            <thead>
+                <tr>
+                    <th>Process</th>
+                    <th>Arrival Time</th>
+                    <th>Burst Time</th>
+                    <th>Finish Time</th>
+                    <th>Turnaround Time</th>
+                    <th>Waiting Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in sortedTable %}
+                <tr>
+                    <td>P{{ row[0] }}</td> <td>{{ row[1] }}</td> <td>{{ row[2] }}</td> <td>{{ row[3] }}</td> <td>{{ row[4] }}</td> <td>{{ row[5] }}</td> </tr>
+                {% endfor %}
+            </tbody>
         </table>
 
-        <br><h1>AVERAGE TAT = {{AveTAT}}</h1>
-        <br><h1>AVERAGE WT = {{AveWT}}</h1>
+        <div class="averages">
+            <div class="avg-box">
+                <span>AVERAGE TAT</span>
+                <strong>{{ AveTAT|round(2) }}</strong>
+            </div>
+            <div class="avg-box">
+                <span>AVERAGE WT</span>
+                <strong>{{ AveWT|round(2) }}</strong>
+            </div>
+        </div>
+    </section>
 
-    </div>
-
-
+    <a href="{{ url_for('routes.home') }}" class="back-btn">← Back to Input</a>
+</div>
 {% endblock %}
