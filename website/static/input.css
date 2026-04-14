@@ -1,6 +1,6 @@
 :root {
     --light-green: #e8f5e9;
-    --focus-green: #81c784;
+    --focus-green: rgb(45, 171, 255);
     --border-grey: #d0d5d9;
     --text-dark: #2c3e50;
     --text-muted: #6c757d;
@@ -34,7 +34,7 @@ body {
 
 .left-panel {
     flex: 1;
-    background-color: rgb(94, 137, 255);
+    background-color: rgb(45, 171, 255);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,7 +105,7 @@ body {
 
 .form-input:focus {
     outline: none;
-    border-color: rgb(94, 137, 255);;
+    border-color: rgb(45, 171, 255);
     box-shadow: 0 0 0 3px rgba(129, 199, 132, 0.25);
 }
 
@@ -118,8 +118,8 @@ select.form-input {
 
 .submit-btn {
     padding: 0.8rem;
-    background-color: rgb(94, 137, 255);;
-    color: var(--text-dark);
+    background-color: rgb(45, 171, 255);
+    color: white;
     border: 1px solid var(--focus-green);
     border-radius: var(--radius);
     font-size: 0.95rem;
@@ -130,7 +130,7 @@ select.form-input {
 }
 
 .submit-btn:hover {
-    background-color: rgb(162, 187, 255);;
+    background-color: rgb(174, 223, 255);
     color: var(--white);
 }
 

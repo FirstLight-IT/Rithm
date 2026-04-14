@@ -37,6 +37,14 @@ def home():
         if len(ATime) < 2 or len(BTime) < 2:
             errors.append("Must have at least 2 values.")
 
+        counter = 0
+        for i in BTime:
+            if i <= 0:
+                counter += 1
+
+        if counter > 0:
+            errors.append("Burstime should not be zero")
+
         if not errors:
             
             session['ATime'] = ATime
